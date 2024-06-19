@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách Nhân viên</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+            animation: fadeInAnimation 1s ease-in-out;
+        }
+        @keyframes fadeInAnimation {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: slideInAnimation 1s ease-in-out;
+        }
+        @keyframes slideInAnimation {
+            0% { transform: translateY(-50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+            animation: bounceInAnimation 1s ease-in-out;
+        }
+        @keyframes bounceInAnimation {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            animation: zoomInAnimation 1s ease-in-out;
+        }
+        @keyframes zoomInAnimation {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        img {
+            display: block;
+            margin: 0 auto;
+            border-radius: 50%;
+            animation: rotateInAnimation 1s ease-in-out;
+        }
+        @keyframes rotateInAnimation {
+            0% { transform: rotate(-360deg); }
+            100% { transform: rotate(0); }
+        }
+        .action-links {
+            text-align: center;
+            animation: fadeInUpAnimation 1s ease-in-out;
+        }
+        @keyframes fadeInUpAnimation {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .add-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            animation: fadeInDownAnimation 1s ease-in-out;
+        }
+        @keyframes fadeInDownAnimation {
+            0% { transform: translateY(-50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .add-link a {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        .add-link a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Danh sách Nhân viên</h1>
+    <div class="add-link">
+        <a th:href="@{/nhanvien/add}">Thêm Nhân viên</a>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>Mã NV</th>
+            <th>Tên NV</th>
+            <th>Phái</th>
+            <th>Nơi Sinh</th>
+            <th>Phòng Ban</th>
+            <th>Lương</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="nhanVien : ${nhanViens}" class="employee-row">
+            <td th:text="${nhanVien.maNV}">Mã NV</td>
+            <td th:text="${nhanVien.tenNV}">Tên NV</td>
+            <td>
+                <img th:src="${nhanVien.phai == 'Nữ' ? '/images/woman.png' : '/images/man.png'}"
+                     th:alt="${nhanVien.phai}" width="50" height="50"/>
+            </td>
+            <td th:text="${nhanVien.noiSinh}">Nơi Sinh</td>
+            <td th:text="${nhanVien.phongBan.tenPhong}">Phòng Ban</td>
+            <td th:text="${nhanVien.luong}">Lương</td>
+            <td class="action-links">
+                <a th:href="@{/nhanvien/edit/{id}(id=${nhanVien.id})}">Sửa</a>
+                <a th:href="@{/nhanvien/delete/{id}(id=${nhanVien.id})}" onclick="return confirm('Bạn có chắc chắn muốn xóa nhân viên này không?');">Xóa</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

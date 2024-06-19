@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Nhân viên</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        form {
+            display: grid;
+            gap: 10px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            width: calc(100% - 22px);
+        }
+        select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            width: calc(100% - 22px);
+        }
+        button[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Thêm Nhân viên</h1>
+    <form th:action="@{/nhanvien/add}" th:object="${nhanVien}" method="post">
+        <div>
+            <label for="maNV">Mã NV:</label>
+            <input type="text" id="maNV" th:field="*{maNV}" required/>
+        </div>
+
+        <div>
+            <label for="tenNV">Tên NV:</label>
+            <input type="text" id="tenNV" th:field="*{tenNV}" required/>
+        </div>
+
+        <div>
+            <label for="phai">Phái:</label>
+            <input type="text" id="phai" th:field="*{phai}" required/>
+        </div>
+
+        <div>
+            <label for="noiSinh">Nơi Sinh:</label>
+            <input type="text" id="noiSinh" th:field="*{noiSinh}" required/>
+        </div>
+
+        <div>
+            <label for="phongBan">Phòng Ban:</label>
+            <select id="phongBan" th:field="*{phongBan.id}" required>
+                <option th:each="phongBan : ${phongBans}" th:value="${phongBan.id}" th:text="${phongBan.tenPhong}"></option>
+            </select>
+        </div>
+
+        <div>
+            <label for="luong">Lương:</label>
+            <input type="number" id="luong" th:field="*{luong}" required/>
+        </div>
+
+        <button type="submit">Lưu</button>
+    </form>
+</div>
+</body>
+</html>

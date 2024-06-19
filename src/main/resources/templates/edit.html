@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sửa Nhân viên</title>
+</head>
+<body>
+<h1>Sửa Nhân viên</h1>
+<form th:action="@{/nhanvien/edit/{id}(id=${nhanVien.id})}" th:object="${nhanVien}" method="post">
+    <label>Mã NV:</label>
+    <input type="text" th:field="*{maNV}"/><br/>
+
+    <label>Tên NV:</label>
+    <input type="text" th:field="*{tenNV}"/><br/>
+
+    <label>Phái:</label>
+    <input type="text" th:field="*{phai}"/><br/>
+
+    <label>Nơi Sinh:</label>
+    <input type="text" th:field="*{noiSinh}"/><br/>
+
+    <label>Phòng Ban:</label>
+    <input type="text" th:field="*{phongBan.tenPhong}"/><br/>
+
+    <label>Lương:</label>
+    <input type="number" th:field="*{luong}"/><br/>
+
+    <button type="submit">Cập nhật</button>
+</form>
+</body>
+</html>
